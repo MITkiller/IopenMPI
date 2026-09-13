@@ -1,0 +1,20 @@
+# 构建输出目录
+build/
+
+# Visual Studio 临时文件
+*.sdf
+*.suo
+*.user
+*.opensdf
+*.ipch
+.vs/
+
+# 编译产物
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.lib
+*.exp
+*.log

@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: 配置 (VS2019 x64)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S", "${workspaceFolder}",
+                "-B", "${workspaceFolder}/build",
+                "-G", "Visual Studio 16 2019",
+                "-A", "x64"
+            ],
+            "problemMatcher": [],
+            "detail": "生成 VS2019 x64 构建系统"
+        },
+        {
+            "label": "CMake: 编译 Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build", "${workspaceFolder}/build",
+                "--config", "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile",
+            "detail": "编译 IopenMPI.exe (Debug)"
+        },
+        {
+            "label": "MPI: 运行 (mpiexec -n 4)",
+            "type": "shell",
+            "command": "mpiexec",
+            "args": [
+                "-n", "4",
+                "${workspaceFolder}/build/Debug/IopenMPI.exe"
+            ],
+            "dependsOn": "CMake: 编译 Debug",
+            "problemMatcher": [],
+            "detail": "编译后用 mpiexec 以 4 进程运行"
+        }
+    ]
+}

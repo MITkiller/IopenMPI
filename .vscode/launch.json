@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // 单进程调试：直接以 rank 0 / size 1 运行，最常用、可直接断点单步
+            "name": "调试 IopenMPI (单进程)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/IopenMPI.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/Debug",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:\\Program Files\\Microsoft MPI\\Bin;${env:PATH}"
+                }
+            ],
+            "console": "integratedTerminal",
+            "preLaunchTask": "CMake: 编译 Debug"
+        },
+        {
+            // 多进程调试：先在终端运行  mpiexec -n 4 -debug build/Debug/IopenMPI.exe
+            // 进程会挂起等待调试器，然后用此配置附加（可重复运行此配置附加到每个 rank）
+            "name": "附加到 MPI 进程 (配合 mpiexec -debug)",
+            "type": "cppvsdbg",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
